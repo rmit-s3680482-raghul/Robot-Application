@@ -35,6 +35,19 @@ public class Robot {
 					System.out.println("Invalid Commands, Please Re-enter correct Commands\n\n");
 					continue;
 				}
+				try {
+					robotMove(usercommands, robot);
+					// It display output to user in the command line.
+					System.out.println("\n\nRobot Output:");
+					System.out.printf("Robot is " + robot.getUnitFrominitialPosition() + " units from initial point.");
+					System.out.printf("\nCurrent robot coordinate is %s,%s \n", robot.getCoordinateX(),
+							robot.getCoordinateY());
+					System.out.printf("Robot is currently facing %s \n",
+							availableDirection[robot.getPresentDirection()] + " direction. \n\n");
+					continue;	
+				} catch (Exception e) {
+					System.err.print(e);
+				}
 			case "E":
 				// It terminate the program.
 				System.out.println("Program Terminated");

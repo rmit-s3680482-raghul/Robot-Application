@@ -63,7 +63,7 @@ public class Robot {
 		}
 		sc.close();
 	}
-	
+
 	public static void robotMove(String[] usercommands, RobotController robot) {
 		int coordinateX = robot.getCoordinateX();
 		int coordinateY = robot.getCoordinateY();
@@ -76,6 +76,7 @@ public class Robot {
 			commandType = nextPosition.substring(0, 1).toUpperCase();
 			count = Integer.valueOf(nextPosition.substring(1));
 			switch (commandType) {
+			// Turn left 90 degree
 			case "L":
 				for (int j = 0; j < count; j++) {
 					if (direction == 0) {
@@ -85,6 +86,7 @@ public class Robot {
 					}
 				}
 				break;
+				// Turn Right 90 degree
 			case "R":
 				for (int j = 0; j < count; j++) {
 					if (direction == availableDirection.length - 1) {
@@ -93,7 +95,8 @@ public class Robot {
 						direction++;
 					}
 				}
-				break; 
+				break;
+				// Move forward with the specified steps. 
 			case "F":
 				for (int j = 0; j < count; j++) {
 					switch (availableDirection[direction]) {
@@ -133,9 +136,10 @@ public class Robot {
 				break;
 			}
 		}
-		robot.setCoordinateX(coordinateX); 
-		robot.setCoordinateY(coordinateY); 
-		robot.setPresentDirection(direction); 
+		robot.setCoordinateX(coordinateX); // it set coordinate X after reading the input commands.
+		robot.setCoordinateY(coordinateY); // it set coordinate Y after reading the input commands.
+		robot.setPresentDirection(direction); // it set direction after reading the input commands.
+		// absolute distance calculation to account for negative coordinates
 		robot.setUnitFromInitialPosition(Math.abs(startX - coordinateX) + Math.abs(startY - coordinateY));
 
 	}

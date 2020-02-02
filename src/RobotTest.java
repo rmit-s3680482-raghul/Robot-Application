@@ -37,14 +37,14 @@ public class RobotTest {
 	@Test
 	void testRobotApplication() {
 		RobotController robotController = new RobotController(0, 0, 0, 0);
-		String[] testArray = { "F1", "R1", "B2", "L1", "B3"};
+		String[] testArray = { "f1", "r1", "b2", "l1", "b3"};
 		boolean testCommandValid = Robot.Validation(testArray);
 		assertEquals(true, testCommandValid);
 		Robot.robotMove(testArray, robotController);
 		assertEquals(robotController.getCoordinateX(), -2);
-		assertEquals(robotController.getCoordinateY(), 2);
+		assertEquals(robotController.getCoordinateY(), -2);
 		assertEquals(robotController.getUnitFrominitialPosition(), 4);
-		assertEquals(robotController.getPresentDirection(), 3);
+		assertEquals(robotController.getPresentDirection(), 0);
 	}
 
 }

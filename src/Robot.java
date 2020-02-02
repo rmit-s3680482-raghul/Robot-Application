@@ -50,6 +50,82 @@ public class Robot {
 		}
 		sc.close();
 	}
+	
+	public static void robotMove(String[] usercommands, RobotController robot) {
+		int coordinateX = robot.getCoordinateX();
+		int coordinateY = robot.getCoordinateY();
+		int direction = robot.getPresentDirection();
+		int count = 0;
+		String nextPosition;
+		String commandType;
+		for (int i = 0; i < usercommands.length; i++) {
+			nextPosition = usercommands[i];
+			commandType = nextPosition.substring(0, 1).toUpperCase();
+			count = Integer.valueOf(nextPosition.substring(1));
+			switch (commandType) {
+			case "L":
+				for (int j = 0; j < count; j++) {
+					if (direction == 0) {
+						direction = availableDirection.length - 1;
+					} else {
+						direction--;
+					}
+				}
+				break;
+			case "R":
+				for (int j = 0; j < count; j++) {
+					if (direction == availableDirection.length - 1) {
+						direction = 0;
+					} else {
+						direction++;
+					}
+				}
+				break; 
+			case "F":
+				for (int j = 0; j < count; j++) {
+					switch (availableDirection[direction]) {
+					case "NORTH":
+						coordinateY++;
+						break;
+					case "EAST":
+						coordinateX++;
+						break;
+					case "SOUTH":
+						coordinateY--;
+						break;
+					case "WEST":
+						coordinateX--;
+						break;
+					}
+				}
+				break;
+				// Move backward with the specific steps.
+			case "B":
+				for (int j = 0; j < count; j++) {
+					switch (availableDirection[direction]) {
+					case "NORTH":
+						coordinateY--;
+						break;
+					case "EAST":
+						coordinateX--;
+						break;
+					case "SOUTH":
+						coordinateY++;
+						break;
+					case "WEST":
+						coordinateX++;
+						break;
+					}
+				}
+				break;
+			}
+		}
+		robot.setCoordinateX(coordinateX); 
+		robot.setCoordinateY(coordinateY); 
+		robot.setPresentDirection(direction); 
+		robot.setUnitFromInitialPosition(Math.abs(startX - coordinateX) + Math.abs(startY - coordinateY));
+
+	}
 
 	public static boolean Validation(String[] usercommands) {
 		
